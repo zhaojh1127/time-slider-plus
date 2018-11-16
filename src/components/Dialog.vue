@@ -1,7 +1,7 @@
 <template>
   <div class="dialog" v-show="dialogFlag">
     <div class="dialog-box">
-      <p class="dialog-title">{{title}}</p>
+      <p :class="['dialog-title', type==='copy'?'left':'']">{{title}}</p>
       <slot></slot>
       <div class="operate">
         <button  @click="leftFun" v-show="leftFlag">{{leftTxt}}</button>
@@ -17,6 +17,12 @@ export default {
       type: Boolean,
       default () {
         return false
+      }
+    },
+    type: {
+      type: String,
+      default () {
+        return ''
       }
     },
     title: {
@@ -86,7 +92,10 @@ export default {
         line-height: 30px;
         font-weight: bold;
         color: #999;
-        border-bottom: 1px solid #ccc;
+        text-align: center;
+      }
+      .left {
+        text-align: left;
       }
       ul {
         max-height: 400px;
@@ -105,6 +114,7 @@ export default {
           }
         }
       }
+      ul::-webkit-scrollbar {display:none}
       .operate {
         width: 100%;
         text-align: center;

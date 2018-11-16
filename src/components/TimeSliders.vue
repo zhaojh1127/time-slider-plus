@@ -15,7 +15,7 @@
     <div class="time-line-container">
       <TimeLine  ref="timeline" v-for="(item, index) in timeLines" :key="item._id" :idx="index" :id="item._id" :title="item.title" :config="item.config" :list="item.timeSlices || []" :buttonMethods="buttonMethods" :hub="hub"/>
     </div>
-    <Dialog :dialogFlag="dialogObj.dialogFlag" :title="dialogObj.title" :leftFlag="dialogObj.leftFlag" :leftTxt="dialogObj.leftTxt" :leftFun="dialogObj.leftFun"  :rightFlag="dialogObj.rightFlag" :rightTxt="dialogObj.rightTxt" :rightFun="dialogObj.rightFun">
+    <Dialog :dialogFlag="dialogObj.dialogFlag" :type="dialogObj.type" :title="dialogObj.title" :leftFlag="dialogObj.leftFlag" :leftTxt="dialogObj.leftTxt" :leftFun="dialogObj.leftFun"  :rightFlag="dialogObj.rightFlag" :rightTxt="dialogObj.rightTxt" :rightFun="dialogObj.rightFun">
       <div v-show="dialogObj.type === 'copy'">
         <ul>
           <li v-for="(item, key) in copyList" :key="key">

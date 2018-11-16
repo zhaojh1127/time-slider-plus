@@ -1,4 +1,8 @@
 const timeUtil = {
+  getTime (timeStr) {
+    const time = new Date(`2018-01-01 ${timeStr}`)
+    return time.getTime()
+  },
   getHours (timeStr) {
     const time = new Date(`2018-01-01 ${timeStr}`)
     return time.getHours()

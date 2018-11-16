@@ -5,7 +5,7 @@
       <div class="title" :style="titleStyle">
         <input type="checkbox" :value="id" v-model="checkedFlag" v-show="config.cleanFlag || config.copyFlag" @click.stop="clickBlock">
         <ul>
-          <li v-for="item in title" :key="item" :class="title.length > 1 ? 'multi' :''" :style="`line-height:${config.height / title.length}px`">{{item}}</li>
+          <li v-for="item in title" :key="item" :title="item" :class="title.length > 1 ? 'multi' :''" :style="`line-height:${config.height / title.length}px`">{{item}}</li>
         </ul>
       </div>
     </div>
@@ -17,7 +17,7 @@
         </ul>
         <div class="editArea" :style="`left:${+getLeftPosition(thisObj.startTime) + (+getBlockWidth(thisObj.startTime, thisObj.endTime) / 2)}px;bottom:${config.staffHeight}px;`" v-show="thisObj.startTime">
           <p>{{`${thisObj.startTime}-${thisObj.endTime}`}}</p>
-          <p>{{getTimeLong(thisObj.startTime, thisObj.endTime)}}分钟</p>
+          <p>{{getTimeLong(thisObj.startTime, thisObj.endTime)}}</p>
           <p class="content">{{thisObj[config.editAreaConfig.contentKey] || ''}}</p>
           <div class="operate" v-show="thisObj.editable && config.editable">
             <button :data-obj="thisObj" @click.stop="clickLeftButton">{{config.editAreaConfig.leftFunTxt || ''}}</button>
@@ -215,10 +215,23 @@ export default {
     },
     // 获取时差(分钟)
     getTimeLong (startTime, endTime) {
-      const st = timeUtil.formatHHmm(startTime)
-      const et = timeUtil.formatHHmm(endTime)
-      const msec = timeUtil.minusTime(st, et)
-      return parseInt(msec / 60000)
+      const stime = timeUtil.getTime(startTime)
+      const etime = timeUtil.getTime(endTime)
+      const timeLong = etime - stime
+      const hours = Math.floor(timeLong / (3600 * 1000))
+      const disHourTime = timeLong % (3600 * 1000)
+      const mins = Math.floor(disHourTime / (60 * 1000))
+      const disMinTIme = disHourTime % (60 * 1000)
+      const seds = Math.round(disMinTIme / 1000)
+      let str = ''
+      if (hours > 0) {
+        str += `${hours}小时`
+      }
+      if (mins > 0) {
+        str += `${mins}分钟`
+      }
+      str += `${seds}秒`
+      return str
     },
     // 获取时间偏短的左偏移量 px
     getLeftPosition (startTime) {
@@ -572,7 +585,7 @@ export default {
         .content {
           padding: 10px 0;
           font-size: 12px;
-          line-height: 14px;
+          line-height: 18px;
           word-break: break-word;
         }
         .operate {
