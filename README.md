@@ -74,10 +74,13 @@ config | objcet | | 时间轴统一配置|
 &emsp;&emsp;**contentKey** | string |  | 展示内容key值，与传参list各节点的属性对应
 &emsp;&emsp;**leftFunTxt** | string |  | 左侧按文案
 &emsp;&emsp;**leftFunValue** | string |  | 左侧事件名称，与传参buttonMethods各节点的key值对应
+&emsp;&emsp;**leftIgnoreFlag** | string |  | 忽略任何情况，都会展示按钮
 &emsp;&emsp;**rightFunTxt** | string |  | 右侧按文案
 &emsp;&emsp;**rightFunValue** | string |  | 右侧事件名称，与传参buttonMethods各节点的key值对应
+&emsp;&emsp;**leftIgnoreFlag** | string |  | 忽略任何情况，都会展示按钮
 &emsp;&emsp;**centerFunTxt** | string |  | 中间按文案
 &emsp;&emsp;**centerFunValue** | string |  | 中间事件名称，与传参buttonMethods各节点的key值对应
+&emsp;&emsp;**centerIgnoreFlag** | string |  | 忽略任何情况，都会展示按钮
 list | list(object) | | 时间轴列表
 &emsp;title| array | | 时间轴名称，多个的话，存在主副标题，主标题为第一个
 &emsp;config| object | 同上config | 时间轴特定配置，优先级高于统一配置

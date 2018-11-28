@@ -19,10 +19,10 @@
           <p>{{`${thisObj.startTime}-${thisObj.endTime}`}}</p>
           <p>{{getTimeLong(thisObj.startTime, thisObj.endTime)}}</p>
           <p class="content">{{thisObj[config.editAreaConfig.contentKey] || ''}}</p>
-          <div class="operate" v-show="thisObj.editable && config.editable">
-            <button :data-obj="thisObj" @click.stop="clickLeftButton">{{config.editAreaConfig.leftFunTxt || ''}}</button>
-            <button :data-obj="thisObj" @click.stop="clickCenterButton">{{config.editAreaConfig.centerFunTxt || ''}}</button>
-            <button :data-obj="thisObj" @click.stop="clickRightButton">{{config.editAreaConfig.rightFunTxt || ''}}</button>
+          <div class="operate">
+            <button :data-obj="thisObj"  v-show="(thisObj.editable && config.editable) || config.editAreaConfig.leftIgnoreFlag" @click.stop="clickLeftButton">{{config.editAreaConfig.leftFunTxt || ''}}</button>
+            <button :data-obj="thisObj"  v-show="(thisObj.editable && config.editable) || config.editAreaConfig.centerIgnoreFlag" @click.stop="clickCenterButton">{{config.editAreaConfig.centerFunTxt || ''}}</button>
+            <button :data-obj="thisObj"  v-show="(thisObj.editable && config.editable) || config.editAreaConfig.rightIgnoreFlag" @click.stop="clickRightButton">{{config.editAreaConfig.rightFunTxt || ''}}</button>
           </div>
         </div>
         <div class="point-line" :style="`height:${config.staffHeight}px;left:${+getLeftPosition(thisObj.startTime) + (+getBlockWidth(thisObj.startTime, thisObj.endTime) / 2)}px;`" v-show="thisObj.startTime">
@@ -230,7 +230,9 @@ export default {
       if (mins > 0) {
         str += `${mins}分钟`
       }
-      str += `${seds}秒`
+      if (seds > 0) {
+        str += `${seds}秒`
+      }
       return str
     },
     // 获取时间偏短的左偏移量 px
