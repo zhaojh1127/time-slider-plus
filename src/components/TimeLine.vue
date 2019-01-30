@@ -172,7 +172,7 @@ export default {
       const list = this.deepCopy(this.list)
       // 排序
       list.sort((obj1, obj2) => {
-        return +this.getLeftPosition(obj1.startTime) - +this.getLeftPosition(obj2.startTime)
+        return new Date(`2018/01/01 ${obj1.startTime}`).getTime() - new Date(`2018/01/01 ${obj2.startTime}`).getTime()
       })
       // 去除冲突时间段
       let preRightPosition = 0
